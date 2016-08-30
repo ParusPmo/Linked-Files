@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes"?>
+<ShowMethod UnitCode="UdoLinkedFiles">
+  <Group Name="default" MaxSelect="sel_rcount">
+    <DataSource Name="UdoLinkedFiles" UnitCode="UdoLinkedFiles" ViewName="UDO_V_LINKEDDOCS_Q">
+      <Params>
+        <OutParams>
+          <Param Name="regno" Field="NRN"/>
+        </OutParams>
+        <PositionParams>
+          <Param Name="pos_regno" Field="NRN"/>
+        </PositionParams>
+        <QueryParams>
+          <Param Name="NCOMPANY">
+            <Context>company</Context>
+          </Param>
+          <Param Name="NDOCUMENT">
+            <Param Name="cond_document"/>
+          </Param>
+          <Param Name="SUNITCODE">
+            <Param Name="cond_unitcode"/>
+          </Param>
+        </QueryParams>
+      </Params>
+      <Key Field="NRN"/>
+    </DataSource>
+  </Group>
+</ShowMethod>

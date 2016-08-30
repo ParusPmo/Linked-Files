@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes"?>
+<Form GroupName="default" OptimalView="0">
+  <Grid>
+    <DataSource Name="UdoLinkedFiles" Caption="Присоединенные файлы" Editable="0" QuickInsert="0" DesignPosLeft="513" DesignPosTop="62" DesignPosWidth="320" DesignPosHeight="240">
+      <Columns>
+        <Column Field="NRN" Caption="Регистрационный  номер" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NCOMPANY" Caption="Организация  (ссылка на COMPANIES(RN))" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SINT_NAME" Caption="Имя файла на сервере (GUID)" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SUNITCODE" Caption="Мнемокод раздела" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NDOCUMENT" Caption="Регистрационный номер документа в разделе" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SREAL_NAME" Caption="Имя файла" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SUSERFULLNAME" Caption="Полное имя пользователя" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="DUPLOAD_TIME" Caption="Дата и время загрузки" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="DSAVE_TILL" Caption="Срок хранения" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NFILESTORE" Caption="Папка хранения" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NFILESIZE" Caption="Размер файла" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SAUTHID" Caption="Пользователь выполнивший загрузку" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SNOTE" Caption="Примечание" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NFILE_DELETED" Caption="Признак удаленного по сроку файла" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+      </Columns>
+      <Actions>
+        <Standard>
+          <Action Kind="3" Hidden="1">
+            <RefreshSources>
+              <RefreshItem Name="UdoLinkedFiles" RefreshKind="2"/>
+            </RefreshSources>
+          </Action>
+          <Action Kind="4" Hidden="1"/>
+          <Action Kind="28" Hidden="1"/>
+          <Action Kind="34" Hidden="1"/>
+        </Standard>
+        <Custom>
+          <Action Code="UDO_LINKEDDOCS_INSERT" Name="Добавить…">
+            <RefreshSources>
+              <RefreshItem Name="UdoLinkedFiles" RefreshKind="2"/>
+            </RefreshSources>
+          </Action>
+          <Action Code="UDO_LINKEDDOCS_UPDATE" Name="Исправить…"/>
+          <Action Code="UDO_LINKEDDOCS_DELETE" Name="Удалить…"/>
+        </Custom>
+      </Actions>
+    </DataSource>
+  </Grid>
+</Form>

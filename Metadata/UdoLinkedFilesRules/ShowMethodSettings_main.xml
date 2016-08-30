@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes"?>
+<ShowMethod UnitCode="UdoLinkedFilesRules">
+  <Group Name="default" MaxSelect="sel_rcount">
+    <DataSource Name="UdoLinkedFilesRules" UnitCode="UdoLinkedFilesRules" ViewName="UDO_V_FILERULES">
+      <Params>
+        <OutParams>
+          <Param Name="regno" Field="NRN"/>
+        </OutParams>
+        <PositionParams>
+          <Param Name="pos_regno" Field="NRN"/>
+        </PositionParams>
+        <FilterParams>
+          <Param Field="NCOMPANY" Operator="EQ">
+            <Context>company</Context>
+          </Param>
+        </FilterParams>
+      </Params>
+      <Key Field="NRN"/>
+    </DataSource>
+  </Group>
+</ShowMethod>
