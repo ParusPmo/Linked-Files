@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes"?>
+<Object Class="TPDynamicForm" Name="TPCustomActionContentProvider">
+  <Left>
+    <I>409</I>
+  </Left>
+  <Top>
+    <I>17</I>
+  </Top>
+  <Width>
+    <I>501</I>
+  </Width>
+  <Height>
+    <I>323</I>
+  </Height>
+  <DesignSize>
+    <List>
+      <Item Index="0">
+        <I>485</I>
+      </Item>
+      <Item Index="1">
+        <I>284</I>
+      </Item>
+    </List>
+  </DesignSize>
+  <PixelsPerInch>
+    <I>96</I>
+  </PixelsPerInch>
+  <TextHeight>
+    <I>13</I>
+  </TextHeight>
+  <Object Class="TPContentGroupBox" Name="ContainerForAutoCreatedControls">
+    <Left>
+      <I>0</I>
+    </Left>
+    <Top>
+      <I>0</I>
+    </Top>
+    <Width>
+      <I>485</I>
+    </Width>
+    <Height>
+      <I>242</I>
+    </Height>
+    <Anchors>
+      <Set>
+        <Item>akLeft</Item>
+        <Item>akTop</Item>
+        <Item>akRight</Item>
+        <Item>akBottom</Item>
+      </Set>
+    </Anchors>
+    <TabOrder>
+      <I>0</I>
+    </TabOrder>
+    <ShowContainer>False</ShowContainer>
+    <ControlId><![CDATA[{2E813F71-CB5F-4934-93F3-09443C13F61E}]]></ControlId>
+    <Object Class="TPContentPageControl">
+      <Left>
+        <I>0</I>
+      </Left>
+      <Top>
+        <I>0</I>
+      </Top>
+      <Width>
+        <I>485</I>
+      </Width>
+      <Height>
+        <I>242</I>
+      </Height>
+      <ActivePage>TPContentTabSheet3</ActivePage>
+      <Align>alClient</Align>
+      <TabOrder>
+        <I>0</I>
+      </TabOrder>
+      <WebColumnSpan>
+        <I>0</I>
+      </WebColumnSpan>
+      <Object Class="TPContentTabSheet" Name="TPContentTabSheet3">
+        <Caption><![CDATA[Реквізити]]></Caption>
+        <DesignSize>
+          <List>
+            <Item Index="0">
+              <I>477</I>
+            </Item>
+            <Item Index="1">
+              <I>214</I>
+            </Item>
+          </List>
+        </DesignSize>
+        <Object Class="TPContainerGroupBox" Name="TPContainerGroupBox5">
+          <Left>
+            <I>5</I>
+          </Left>
+          <Top>
+            <I>0</I>
+          </Top>
+          <Width>
+            <I>467</I>
+          </Width>
+          <Height>
+            <I>207</I>
+          </Height>
+          <Anchors>
+            <Set>
+              <Item>akLeft</Item>
+              <Item>akTop</Item>
+              <Item>akRight</Item>
+            </Set>
+          </Anchors>
+          <Caption><![CDATA[Реквізити]]></Caption>
+          <TabOrder>
+            <I>0</I>
+          </TabOrder>
+          <WebColumnSpan>
+            <I>0</I>
+          </WebColumnSpan>
+          <DesignSize>
+            <List>
+              <Item Index="0">
+                <I>467</I>
+              </Item>
+              <Item Index="1">
+                <I>207</I>
+              </Item>
+            </List>
+          </DesignSize>
+          <ControlId><![CDATA[{B9E9456C-4A55-4E6A-8C57-93894738D21F}]]></ControlId>
+          <Object Class="TPContentEdit" Name="SCODE">
+            <Left>
+              <I>199</I>
+            </Left>
+            <Top>
+              <I>16</I>
+            </Top>
+            <Width>
+              <I>258</I>
+            </Width>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <Anchors>
+              <Set>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ContentDictInterface.Params>
+              <Collection/>
+            </ContentDictInterface.Params>
+            <ControlLabel.Text><![CDATA[Мнемокод місця зберігання]]></ControlLabel.Text>
+            <MaxLength>
+              <I>20</I>
+            </MaxLength>
+            <Required>True</Required>
+            <TabOrder>
+              <I>0</I>
+            </TabOrder>
+            <ControlId><![CDATA[{CE9F448F-42D8-4F0B-BC16-85107A47549C}]]></ControlId>
+          </Object>
+          <Object Class="TPContentMemo" Name="SNAME">
+            <Left>
+              <I>10</I>
+            </Left>
+            <Top>
+              <I>58</I>
+            </Top>
+            <Width>
+              <I>447</I>
+            </Width>
+            <Height>
+              <I>61</I>
+            </Height>
+            <Anchors>
+              <Set>
+                <Item>akLeft</Item>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ControlLabel.Position>
+              <I>0</I>
+            </ControlLabel.Position>
+            <ControlLabel.Text><![CDATA[Найменування місця зберігання]]></ControlLabel.Text>
+            <MaxLength>
+              <I>160</I>
+            </MaxLength>
+            <Required>True</Required>
+            <TabOrder>
+              <I>1</I>
+            </TabOrder>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <WebHeight>
+              <I>0</I>
+            </WebHeight>
+            <ControlId><![CDATA[{00A0A3D1-5BD8-4B46-B98A-D467425EC90E}]]></ControlId>
+          </Object>
+          <Object Class="TPContentNumberEdit" Name="NMAXFILES">
+            <Left>
+              <I>344</I>
+            </Left>
+            <Top>
+              <I>123</I>
+            </Top>
+            <Width>
+              <I>113</I>
+            </Width>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <Anchors>
+              <Set>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ControlLabel.Text><![CDATA[Максимальна кількість файлів в папці]]></ControlLabel.Text>
+            <ContentDictInterface.Params>
+              <Collection/>
+            </ContentDictInterface.Params>
+            <MaxDigits>
+              <I>6</I>
+            </MaxDigits>
+            <DecimalPart>
+              <I>0</I>
+            </DecimalPart>
+            <Required>True</Required>
+            <TabOrder>
+              <I>2</I>
+            </TabOrder>
+            <ControlId><![CDATA[{D357EF05-D4F1-4233-820C-8C38D537C813}]]></ControlId>
+          </Object>
+          <Object Class="TPContentSelectComboBox" Name="STORE_TYPE__">
+            <Left>
+              <I>199</I>
+            </Left>
+            <Top>
+              <I>148</I>
+            </Top>
+            <Width>
+              <I>258</I>
+            </Width>
+            <Anchors>
+              <Set>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ControlLabel.Text><![CDATA[Тип місця зберігання]]></ControlLabel.Text>
+            <TabOrder>
+              <I>3</I>
+            </TabOrder>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <Enabled>False</Enabled>
+            <ControlId><![CDATA[{C242D6D5-F1E4-4498-B785-98AEE1088AB0}]]></ControlId>
+          </Object>
+          <Object Class="TPContentEdit" Name="SORA_DIRECTORY">
+            <Left>
+              <I>199</I>
+            </Left>
+            <Top>
+              <I>173</I>
+            </Top>
+            <Width>
+              <I>258</I>
+            </Width>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <Anchors>
+              <Set>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ContentDictInterface.Params>
+              <Collection/>
+            </ContentDictInterface.Params>
+            <ControlLabel.Text><![CDATA[Директорія Oracle]]></ControlLabel.Text>
+            <MaxLength>
+              <I>30</I>
+            </MaxLength>
+            <TabOrder>
+              <I>4</I>
+            </TabOrder>
+            <ControlId><![CDATA[{0D9B3958-1A7C-46BC-AF5C-3E008D258F41}]]></ControlId>
+          </Object>
+        </Object>
+      </Object>
+      <Object Class="TPContentTabSheet" Name="TPContentTabSheet1">
+        <Caption><![CDATA[Параметри FTP]]></Caption>
+        <DesignSize>
+          <List>
+            <Item Index="0">
+              <I>477</I>
+            </Item>
+            <Item Index="1">
+              <I>214</I>
+            </Item>
+          </List>
+        </DesignSize>
+        <Object Class="TPContainerGroupBox" Name="TPContainerGroupBox1">
+          <Left>
+            <I>5</I>
+          </Left>
+          <Top>
+            <I>0</I>
+          </Top>
+          <Width>
+            <I>467</I>
+          </Width>
+          <Height>
+            <I>72</I>
+          </Height>
+          <Anchors>
+            <Set>
+              <Item>akLeft</Item>
+              <Item>akTop</Item>
+              <Item>akRight</Item>
+            </Set>
+          </Anchors>
+          <Caption><![CDATA[Сервер]]></Caption>
+          <TabOrder>
+            <I>0</I>
+          </TabOrder>
+          <WebColumnSpan>
+            <I>0</I>
+          </WebColumnSpan>
+          <WebColumnsDefinition><![CDATA[65%;35%]]></WebColumnsDefinition>
+          <DesignSize>
+            <List>
+              <Item Index="0">
+                <I>467</I>
+              </Item>
+              <Item Index="1">
+                <I>72</I>
+              </Item>
+            </List>
+          </DesignSize>
+          <ControlId><![CDATA[{F59FC6F4-ABCE-4A58-893A-599027B2E7C5}]]></ControlId>
+          <Object Class="TPContentEdit" Name="SDOMAINNAME">
+            <Left>
+              <I>137</I>
+            </Left>
+            <Top>
+              <I>16</I>
+            </Top>
+            <Width>
+              <I>320</I>
+            </Width>
+            <WebColumnSpan>
+              <I>2</I>
+            </WebColumnSpan>
+            <Anchors>
+              <Set>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ContentDictInterface.Params>
+              <Collection/>
+            </ContentDictInterface.Params>
+            <ControlLabel.Text><![CDATA[Доменне ім'я]]></ControlLabel.Text>
+            <ControlLabel.WebSize><![CDATA[28.41163%]]></ControlLabel.WebSize>
+            <MaxLength>
+              <I>240</I>
+            </MaxLength>
+            <TabOrder>
+              <I>0</I>
+            </TabOrder>
+            <ControlId><![CDATA[{32673EA4-1EAC-470D-BD0E-EA093E8723D2}]]></ControlId>
+          </Object>
+          <Object Class="TPContentEdit" Name="SIPADDRESS">
+            <Left>
+              <I>137</I>
+            </Left>
+            <Top>
+              <I>41</I>
+            </Top>
+            <Width>
+              <I>160</I>
+            </Width>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <Anchors>
+              <Set>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ContentDictInterface.Params>
+              <Collection/>
+            </ContentDictInterface.Params>
+            <ControlLabel.Text><![CDATA[IP адреса]]></ControlLabel.Text>
+            <ControlLabel.WebSize><![CDATA[44.25087%]]></ControlLabel.WebSize>
+            <MaxLength>
+              <I>15</I>
+            </MaxLength>
+            <TabOrder>
+              <I>1</I>
+            </TabOrder>
+            <ControlId><![CDATA[{EA523E69-CB0B-4394-8AF5-EEE785ABC97E}]]></ControlId>
+          </Object>
+          <Object Class="TPContentNumberEdit" Name="NPORT">
+            <Left>
+              <I>409</I>
+            </Left>
+            <Top>
+              <I>41</I>
+            </Top>
+            <Width>
+              <I>48</I>
+            </Width>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <Anchors>
+              <Set>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ControlLabel.Position>
+              <I>307</I>
+            </ControlLabel.Position>
+            <ControlLabel.Text><![CDATA[Порт FTP сервера]]></ControlLabel.Text>
+            <ControlLabel.WebSize><![CDATA[68.00000%]]></ControlLabel.WebSize>
+            <ContentDictInterface.Params>
+              <Collection/>
+            </ContentDictInterface.Params>
+            <MaxDigits>
+              <I>5</I>
+            </MaxDigits>
+            <DecimalPart>
+              <I>0</I>
+            </DecimalPart>
+            <TabOrder>
+              <I>2</I>
+            </TabOrder>
+            <ControlId><![CDATA[{A69B2528-EF17-4521-B7B5-5A45741FE6E1}]]></ControlId>
+          </Object>
+        </Object>
+        <Object Class="TPContainerGroupBox" Name="TPContainerGroupBox2">
+          <Left>
+            <I>5</I>
+          </Left>
+          <Top>
+            <I>72</I>
+          </Top>
+          <Width>
+            <I>467</I>
+          </Width>
+          <Height>
+            <I>71</I>
+          </Height>
+          <Anchors>
+            <Set>
+              <Item>akLeft</Item>
+              <Item>akTop</Item>
+              <Item>akRight</Item>
+            </Set>
+          </Anchors>
+          <Caption><![CDATA[Авторизація]]></Caption>
+          <TabOrder>
+            <I>1</I>
+          </TabOrder>
+          <WebColumnSpan>
+            <I>0</I>
+          </WebColumnSpan>
+          <DesignSize>
+            <List>
+              <Item Index="0">
+                <I>467</I>
+              </Item>
+              <Item Index="1">
+                <I>71</I>
+              </Item>
+            </List>
+          </DesignSize>
+          <ControlId><![CDATA[{F6A3FB62-31AB-4D21-A1AC-6D31E3F14533}]]></ControlId>
+          <Object Class="TPContentEdit" Name="SUSERNAME">
+            <Left>
+              <I>237</I>
+            </Left>
+            <Top>
+              <I>16</I>
+            </Top>
+            <Width>
+              <I>220</I>
+            </Width>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <Anchors>
+              <Set>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ContentDictInterface.Params>
+              <Collection/>
+            </ContentDictInterface.Params>
+            <ControlLabel.Text><![CDATA[Ім'я користувача]]></ControlLabel.Text>
+            <ControlLabel.WebSize><![CDATA[50.78300%]]></ControlLabel.WebSize>
+            <MaxLength>
+              <I>30</I>
+            </MaxLength>
+            <TabOrder>
+              <I>0</I>
+            </TabOrder>
+            <ControlId><![CDATA[{D9CEB1F8-3C45-4049-8FC4-1A2AC4D561FF}]]></ControlId>
+          </Object>
+          <Object Class="TPContentEdit" Name="SPASSWORD">
+            <Left>
+              <I>237</I>
+            </Left>
+            <Top>
+              <I>41</I>
+            </Top>
+            <Width>
+              <I>220</I>
+            </Width>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <Anchors>
+              <Set>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ContentDictInterface.Params>
+              <Collection/>
+            </ContentDictInterface.Params>
+            <ControlLabel.Text><![CDATA[Пароль]]></ControlLabel.Text>
+            <ControlLabel.WebSize><![CDATA[50.78300%]]></ControlLabel.WebSize>
+            <MaxLength>
+              <I>30</I>
+            </MaxLength>
+            <TabOrder>
+              <I>1</I>
+            </TabOrder>
+            <ControlId><![CDATA[{AC3E861C-485E-4046-B564-6A07A6AB89A3}]]></ControlId>
+          </Object>
+        </Object>
+        <Object Class="TPContainerGroupBox" Name="TPContainerGroupBox3">
+          <Left>
+            <I>5</I>
+          </Left>
+          <Top>
+            <I>145</I>
+          </Top>
+          <Width>
+            <I>467</I>
+          </Width>
+          <Height>
+            <I>50</I>
+          </Height>
+          <Anchors>
+            <Set>
+              <Item>akLeft</Item>
+              <Item>akTop</Item>
+              <Item>akRight</Item>
+            </Set>
+          </Anchors>
+          <Caption><![CDATA[Папки]]></Caption>
+          <TabOrder>
+            <I>2</I>
+          </TabOrder>
+          <WebColumnSpan>
+            <I>0</I>
+          </WebColumnSpan>
+          <DesignSize>
+            <List>
+              <Item Index="0">
+                <I>467</I>
+              </Item>
+              <Item Index="1">
+                <I>50</I>
+              </Item>
+            </List>
+          </DesignSize>
+          <ControlId><![CDATA[{581BE6CA-96E7-4BEC-8AC6-07BAE9ACE163}]]></ControlId>
+          <Object Class="TPContentEdit" Name="SROOTFOLDER">
+            <Left>
+              <I>237</I>
+            </Left>
+            <Top>
+              <I>16</I>
+            </Top>
+            <Width>
+              <I>220</I>
+            </Width>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <Anchors>
+              <Set>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ContentDictInterface.Params>
+              <Collection/>
+            </ContentDictInterface.Params>
+            <ControlLabel.Text><![CDATA[Коренева папка для зберігання файлів]]></ControlLabel.Text>
+            <ControlLabel.WebSize><![CDATA[50.78300%]]></ControlLabel.WebSize>
+            <MaxLength>
+              <I>240</I>
+            </MaxLength>
+            <TabOrder>
+              <I>0</I>
+            </TabOrder>
+            <ControlId><![CDATA[{A0F9D77E-347F-431B-8E8A-A001600EE0BB}]]></ControlId>
+          </Object>
+        </Object>
+      </Object>
+      <Object Class="TPContentTabSheet" Name="TPContentTabSheet2">
+        <Caption><![CDATA[Примітка]]></Caption>
+        <DesignSize>
+          <List>
+            <Item Index="0">
+              <I>477</I>
+            </Item>
+            <Item Index="1">
+              <I>214</I>
+            </Item>
+          </List>
+        </DesignSize>
+        <Object Class="TPContainerGroupBox" Name="TPContainerGroupBox4">
+          <Left>
+            <I>5</I>
+          </Left>
+          <Top>
+            <I>1</I>
+          </Top>
+          <Width>
+            <I>467</I>
+          </Width>
+          <Height>
+            <I>207</I>
+          </Height>
+          <Anchors>
+            <Set>
+              <Item>akLeft</Item>
+              <Item>akTop</Item>
+              <Item>akRight</Item>
+            </Set>
+          </Anchors>
+          <Caption><![CDATA[Примітка]]></Caption>
+          <TabOrder>
+            <I>0</I>
+          </TabOrder>
+          <WebColumnSpan>
+            <I>0</I>
+          </WebColumnSpan>
+          <DesignSize>
+            <List>
+              <Item Index="0">
+                <I>467</I>
+              </Item>
+              <Item Index="1">
+                <I>207</I>
+              </Item>
+            </List>
+          </DesignSize>
+          <ControlId><![CDATA[{45445080-6CF2-415A-95BB-9028F0DA3B71}]]></ControlId>
+          <Object Class="TPContentMemo" Name="SNOTE">
+            <Left>
+              <I>10</I>
+            </Left>
+            <Top>
+              <I>17</I>
+            </Top>
+            <Width>
+              <I>447</I>
+            </Width>
+            <Height>
+              <I>179</I>
+            </Height>
+            <Anchors>
+              <Set>
+                <Item>akLeft</Item>
+                <Item>akTop</Item>
+                <Item>akRight</Item>
+              </Set>
+            </Anchors>
+            <ControlLabel.Position>
+              <I>0</I>
+            </ControlLabel.Position>
+            <MaxLength>
+              <I>4000</I>
+            </MaxLength>
+            <TabOrder>
+              <I>0</I>
+            </TabOrder>
+            <WebColumnSpan>
+              <I>0</I>
+            </WebColumnSpan>
+            <WebHeight>
+              <I>0</I>
+            </WebHeight>
+            <ControlId><![CDATA[{B9FDB3DB-55D1-4406-9D02-02CDEE7AD5B4}]]></ControlId>
+          </Object>
+        </Object>
+      </Object>
+    </Object>
+  </Object>
+  <Object Class="TPContentCancelButton" Name="CancelButton">
+    <Left>
+      <I>387</I>
+    </Left>
+    <Top>
+      <I>251</I>
+    </Top>
+    <Width>
+      <I>90</I>
+    </Width>
+    <Anchors>
+      <Set>
+        <Item>akRight</Item>
+        <Item>akBottom</Item>
+      </Set>
+    </Anchors>
+    <TabOrder>
+      <I>2</I>
+    </TabOrder>
+    <WebColumnSpan>
+      <I>0</I>
+    </WebColumnSpan>
+  </Object>
+  <Object Class="TPContentOkButton" Name="OKButton">
+    <Left>
+      <I>292</I>
+    </Left>
+    <Top>
+      <I>251</I>
+    </Top>
+    <Width>
+      <I>90</I>
+    </Width>
+    <Anchors>
+      <Set>
+        <Item>akRight</Item>
+        <Item>akBottom</Item>
+      </Set>
+    </Anchors>
+    <TabOrder>
+      <I>1</I>
+    </TabOrder>
+    <WebColumnSpan>
+      <I>0</I>
+    </WebColumnSpan>
+  </Object>
+  <Object Class="TPContentUserConditions" Name="AutoCreatedUserConditions">
+    <Conditions><![CDATA[<?xml version="1.0" encoding="windows-1251" standalone="yes"?>
+<control-rules>
+	<rule name="DIS_VS_FTP">
+
+		<condition>
+			<operator type="EQ">
+				<property control="STORE_TYPE__" name="Value"/>
+				<constant type="number" value="1"/>
+			</operator>
+		</condition>
+		<then>
+			<assign>
+				<left>
+					<property control="SORA_DIRECTORY" name="Enabled"/>
+				</left>
+				<right>
+					<constant type="bool" value="true"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="SORA_DIRECTORY" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="true"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="TPContentTabSheet1" name="TabVisible"/>
+				</left>
+				<right>
+					<constant type="bool" value="false"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="SDOMAINNAME" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="false"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="SUSERNAME" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="false"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="SPASSWORD" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="false"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="SROOTFOLDER" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="false"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="NPORT" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="false"/>
+				</right>
+			</assign>
+		</then>
+		<else>
+			<assign>
+				<left>
+					<property control="SORA_DIRECTORY" name="Enabled"/>
+				</left>
+				<right>
+					<constant type="bool" value="false"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="SORA_DIRECTORY" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="false"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="TPContentTabSheet1" name="TabVisible"/>
+				</left>
+				<right>
+					<constant type="bool" value="true"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="SDOMAINNAME" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="true"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="SUSERNAME" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="true"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="SPASSWORD" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="true"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="SROOTFOLDER" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="true"/>
+				</right>
+			</assign>
+			<assign>
+				<left>
+					<property control="NPORT" name="Required"/>
+				</left>
+				<right>
+					<constant type="bool" value="true"/>
+				</right>
+			</assign>
+		</else>
+	</rule>
+</control-rules>]]></Conditions>
+  </Object>
+</Object>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes"?>
+<Form GroupName="default" OptimalView="0">
+  <Grid>
+    <DataSource Name="UdoLinkedFiles" Caption="Приєднані файли" Editable="0" QuickInsert="0" DesignPosLeft="513" DesignPosTop="62" DesignPosWidth="320" DesignPosHeight="240">
+      <Columns>
+        <Column Field="NRN" Caption="Реєстраційний номер" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NCOMPANY" Caption="Організація" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SINT_NAME" Caption="Ім&apos;я файлу на сервері" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SUNITCODE" Caption="Код розділу" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NDOCUMENT" Caption="Реєстраційний номер документу в розділі" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SREAL_NAME" Caption="Ім&apos;я файлу" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SUSERFULLNAME" Caption="Повне ім&apos;я користувача" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="DUPLOAD_TIME" Caption="Дата та час завантаження" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="DSAVE_TILL" Caption="Термін зберігання" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NFILESTORE" Caption="Папка зберігання" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NFILESIZE" Caption="Розмір файлу" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SAUTHID" Caption="Користувач, що виконав завантаження" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SNOTE" Caption="Примітка" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NFILE_DELETED" Caption="Ознака віддаленого за терміном файлу" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+      </Columns>
+      <Actions>
+        <Standard>
+          <Action Kind="3" Hidden="1">
+            <RefreshSources>
+              <RefreshItem Name="UdoLinkedFiles" RefreshKind="2"/>
+            </RefreshSources>
+          </Action>
+          <Action Kind="4" Hidden="1"/>
+          <Action Kind="28" Hidden="1"/>
+          <Action Kind="34" Hidden="1"/>
+        </Standard>
+        <Custom>
+          <Action Code="UDO_LINKEDDOCS_INSERT" Name="Додавання/розмноження запису">
+            <RefreshSources>
+              <RefreshItem Name="UdoLinkedFiles" RefreshKind="2"/>
+            </RefreshSources>
+          </Action>
+          <Action Code="UDO_LINKEDDOCS_UPDATE" Name="Виправлення запису"/>
+          <Action Code="UDO_LINKEDDOCS_DELETE" Name="Видалення запису"/>
+        </Custom>
+      </Actions>
+    </DataSource>
+  </Grid>
+</Form>

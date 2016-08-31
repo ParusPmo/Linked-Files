@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes"?>
+<Form GroupName="default" OptimalView="1">
+  <Grid>
+    <DataSource Name="UdoFileStores" Caption="Места хранения присоединенных файлов" Editable="0" QuickInsert="0" DesignPosLeft="0" DesignPosTop="0" DesignPosWidth="0" DesignPosHeight="0">
+      <Columns>
+        <Column Field="NRN" Caption="Регистрационный  номер" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NCOMPANY" Caption="Организация  (ссылка на COMPANIES(RN))" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NCRN" Caption="Каталог  (ссылка на ACATALOG(RN))" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SCODE" Caption="Мнемокод места хранения" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SNAME" Caption="Наименование места хранения" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SNOTE" Caption="Примечание" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NSTORE_TYPE" Caption="Тип места хранения" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SORA_DIRECTORY" Caption="Директория Oracle" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SDOMAINNAME" Caption="Доменное имя" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SIPADDRESS" Caption="IP адрес" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NPORT" Caption="Порт FTP сервера" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SUSERNAME" Caption="Имя пользователя" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SPASSWORD" Caption="Пароль" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SROOTFOLDER" Caption="Корневая папка для хранения файлов" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NMAXFILES" Caption="Максимальное количество файлов в папке" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+      </Columns>
+      <Actions>
+        <Standard/>
+        <Custom/>
+      </Actions>
+      <Details>
+        <DataSource Name="UdoFileStoreFolders" Caption="Папки" Editable="0" QuickInsert="0" DesignPosLeft="0" DesignPosTop="0" DesignPosWidth="0" DesignPosHeight="0">
+          <Columns>
+            <Column Field="NRN" Caption="Регистрационный  номер" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+            <Column Field="NCOMPANY" Caption="Организация  (ссылка на COMPANIES(RN))" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+            <Column Field="NCRN" Caption="Каталог  (ссылка на ACATALOG(RN))" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+            <Column Field="NPRN" Caption="Регистрационный номер родительской записи" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+            <Column Field="SNAME" Caption="Наименование папки" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+            <Column Field="NFILECNT" Caption="Количество файлов в папке" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+          </Columns>
+          <Actions>
+            <Standard/>
+            <Custom/>
+          </Actions>
+        </DataSource>
+      </Details>
+    </DataSource>
+  </Grid>
+</Form>

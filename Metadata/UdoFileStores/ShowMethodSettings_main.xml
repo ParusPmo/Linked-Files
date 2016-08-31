@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes"?>
+<ShowMethod UnitCode="UdoFileStores">
+  <Group Name="default" MaxSelect="sel_rcount">
+    <DataSource Name="UdoFileStores" UnitCode="UdoFileStores" ViewName="UDO_V_FILESTORES">
+      <Params>
+        <OutParams>
+          <Param Name="regno" Field="NRN"/>
+          <Param Name="code" Field="SCODE"/>
+        </OutParams>
+        <PositionParams>
+          <Param Name="pos_regno" Field="NRN"/>
+          <Param Name="pos_code" Field="SCODE"/>
+        </PositionParams>
+        <FilterParams>
+          <Param Field="NCOMPANY" Operator="EQ">
+            <Context>company</Context>
+          </Param>
+          <Param Field="NCRN" Operator="EQ">
+            <Context>catalog</Context>
+          </Param>
+        </FilterParams>
+      </Params>
+      <Key Field="NRN"/>
+      <Details>
+        <DataSource Name="UdoFileStoreFolders" UnitCode="UdoFileStoreFolders" ViewName="UDO_V_FILEFOLDERS">
+          <Params>
+            <FilterParams>
+              <Param Field="NPRN" Operator="EQ">
+                <Context>parentkey</Context>
+              </Param>
+            </FilterParams>
+          </Params>
+          <Key Field="NRN"/>
+        </DataSource>
+      </Details>
+    </DataSource>
+  </Group>
+</ShowMethod>

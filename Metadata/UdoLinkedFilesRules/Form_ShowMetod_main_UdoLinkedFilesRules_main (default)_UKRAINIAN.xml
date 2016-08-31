@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes"?>
+<Form GroupName="default" OptimalView="0">
+  <Grid>
+    <DataSource Name="UdoLinkedFilesRules" Caption="Розділи приєднаних файлів" Editable="0" QuickInsert="0" DesignPosLeft="0" DesignPosTop="0" DesignPosWidth="0" DesignPosHeight="0">
+      <Columns>
+        <Column Field="NRN" Caption="Реєстраційний номер" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NCOMPANY" Caption="Організація" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SUNITCODE" Caption="Розділ системи" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SUNITNAME" Caption="Розділ (найменування)" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SFILESTORE" Caption="Сервер зберігання" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NFILESTORE" Caption="Місце зберігання" Visible="0" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NMAXFILES" Caption="Максимальна кількість приєднаних до запису файлів (0 - не обмежена)" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NMAXFILESIZE" Caption="Максимальна розмір приєднаного файлу (Кбайт) (0 - не обмежений)" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NLIFETIME" Caption="Термін зберігання файлу (міс) (0 - не обмежений)" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="NBLOCKED" Caption="Заблокувати додавання" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="STABLENAME" Caption="Ім&apos;я таблиці розділу" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SCTLGFIELD" Caption="Поле дерева каталогів" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+        <Column Field="SJPERSFIELD" Caption="Поле юридичної особи" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
+      </Columns>
+      <Actions>
+        <Standard/>
+        <Custom>
+          <Action Code="UDO_FILERULES_BLOCK" Name="Заблокувати"/>
+          <Action Code="UDO_FILERULES_UNBLOCK" Name="Розблокувати"/>
+        </Custom>
+      </Actions>
+    </DataSource>
+  </Grid>
+</Form>
