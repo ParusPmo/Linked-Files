@@ -1,4 +1,3 @@
-/* Базовое добавление */
 create or replace procedure UDO_P_FILERULES_BASE_INSERT
 (
   NCOMPANY     in number,   -- Организация  (ссылка на COMPANIES(RN))
@@ -12,24 +11,24 @@ create or replace procedure UDO_P_FILERULES_BASE_INSERT
   SJPERSFIELD  in varchar2, -- Поле юридического лица
   NRN          out number   -- Регистрационный  номер
 ) as
-  ACTION_NAME                 constant varchar2(20) := 'Присоединенные файлы';
+  ACTION_NAME_UK              constant varchar2(15) := 'Приєднані файли';
+  ACTION_NAME_RU              constant varchar2(20) := 'Присоединенные файлы';
   ACTION_SUFFIX               constant varchar2(6) := 'VFILES';
   LINKEDDOC_UNITCODE          constant varchar2(30) := 'UdoLinkedFiles';
   LINKDOCS_SHOW_METHOD_CODE   constant varchar2(4) := 'main';
   LINKDOCS_SHOW_METHOD_PARAMS constant clob := '<?xml version="1.0" encoding="windows-1251" standalone="yes"?>' ||
                                                CHR(10) || '<Params UnitCode="main">' || CHR(10) ||
                                                '   <Param Name="cond_document">' || CHR(10) ||
-                                               '      <Context>key</Context>' || CHR(10) ||
-                                               '   </Param>' || CHR(10) ||
+                                               '      <Context>key</Context>' || CHR(10) || '   </Param>' || CHR(10) ||
                                                '   <Param Name="cond_unitcode">' || CHR(10) ||
-                                               '      <Context>unitcode</Context>' || CHR(10) ||
-                                               '   </Param>' || CHR(10) || '</Params>';
+                                               '      <Context>unitcode</Context>' || CHR(10) || '   </Param>' ||
+                                               CHR(10) || '</Params>';
 
   cursor L_ACTION is
     select SUBSTR(CODE, 1, INSTR(CODE, '_', -1)) || ACTION_SUFFIX CODE
       from UNITFUNC
      where UNITCODE = SUNITCODE
-       and STANDARD = 1;
+       and standard = 1;
   L_UNITFUNC             PKG_STD.TREF;
   L_UNITLIST_RN          PKG_STD.TREF;
   L_LINKDOCS_SHOW_METHOD PKG_STD.TREF;
@@ -42,11 +41,7 @@ begin
     into L_SFUNCCODE;
   close L_ACTION;
 
-  FIND_SHOWMETHODS_CODE(0,
-                        0,
-                        LINKEDDOC_UNITCODE,
-                        LINKDOCS_SHOW_METHOD_CODE,
-                        L_LINKDOCS_SHOW_METHOD);
+  FIND_SHOWMETHODS_CODE(0, 0, LINKEDDOC_UNITCODE, LINKDOCS_SHOW_METHOD_CODE, L_LINKDOCS_SHOW_METHOD);
 
   FIND_UNITLIST_CODE(0, 0, SUNITCODE, L_UNITLIST_RN);
 
@@ -55,7 +50,7 @@ begin
   P_UNITFUNC_BASE_INSERT(NPRN              => L_UNITLIST_RN,
                          SDETAILCODE       => null,
                          SCODE             => L_SFUNCCODE,
-                         SNAME             => ACTION_NAME,
+                         SNAME             => ACTION_NAME_RU,
                          NNUMB             => L_NFUNCNUMB,
                          NSYSIMAGE         => null,
                          NSTANDARD         => 11, -- открыть
@@ -71,6 +66,12 @@ begin
                          SPRODUCER         => null,
                          ISWAP_STANDARD    => 0,
                          NRN               => L_UNITFUNC);
+
+  insert into RESOURCES
+    (RN, TABLE_NAME, TABLE_ROW, RESOURCE_NAME, RESOURCE_LANG, RESOURCE_TEXT)
+  values
+    (GEN_ID, 'UNITFUNC', L_UNITFUNC, 'NAME', 'UKRAINIAN', ACTION_NAME_UK);
+
   P_DMSCLACTIONSSTP_BASE_INSERT(NPRN             => L_UNITFUNC,
                                 NPOSITION        => 1,
                                 NSTPTYPE         => 1,
@@ -89,11 +90,10 @@ begin
 
   /* добавление записи в таблицу */
   insert into UDO_FILERULES
-    (RN, COMPANY, UNITCODE, FILESTORE, MAXFILES, MAXFILESIZE, LIFETIME, BLOCKED, TABLENAME,
-     CTLGFIELD, JPERSFIELD, UNITFUNC)
+    (RN, COMPANY, UNITCODE, FILESTORE, MAXFILES, MAXFILESIZE, LIFETIME, BLOCKED, TABLENAME, CTLGFIELD, JPERSFIELD,
+     UNITFUNC)
   values
-    (NRN, NCOMPANY, SUNITCODE, NFILESTORE, NMAXFILES, NMAXFILESIZE, NLIFETIME, 0, STABLENAME,
-     SCTLGFIELD, SJPERSFIELD, L_UNITFUNC);
+    (NRN, NCOMPANY, SUNITCODE, NFILESTORE, NMAXFILES, NMAXFILESIZE, NLIFETIME, 0, STABLENAME, SCTLGFIELD, SJPERSFIELD,
+     L_UNITFUNC);
 end;
 /
-show errors procedure UDO_P_FILERULES_BASE_INSERT;
