@@ -67,7 +67,7 @@
       <Height>
         <I>190</I>
       </Height>
-      <ActivePage>TPContentTabSheet2</ActivePage>
+      <ActivePage>TPContentTabSheet1</ActivePage>
       <Align>alClient</Align>
       <TabOrder>
         <I>0</I>
@@ -130,7 +130,7 @@
               <I>112</I>
             </Left>
             <Top>
-              <I>16</I>
+              <I>41</I>
             </Top>
             <Width>
               <I>258</I>
@@ -153,8 +153,9 @@
             </MaxLength>
             <Required>True</Required>
             <TabOrder>
-              <I>0</I>
+              <I>1</I>
             </TabOrder>
+            <Enabled>False</Enabled>
             <ReadOnly>True</ReadOnly>
             <ControlId><![CDATA[{4BF7CDA2-5DD8-4431-B4D0-314CF6B50BCB}]]></ControlId>
           </Object>
@@ -163,7 +164,7 @@
               <I>112</I>
             </Left>
             <Top>
-              <I>41</I>
+              <I>16</I>
             </Top>
             <Width>
               <I>258</I>
@@ -182,7 +183,7 @@
             <FileNameControl>SREAL_NAME</FileNameControl>
             <Required>True</Required>
             <TabOrder>
-              <I>1</I>
+              <I>0</I>
             </TabOrder>
             <WebColumnSpan>
               <I>0</I>
