@@ -5,11 +5,12 @@ create or replace package body UDO_PKG_LINKEDDOCS is
   LINKEDDOC_FUNC_INSERT constant varchar2(30) := 'UDO_LINKEDDOCS_INSERT';
   LINKEDDOC_FUNC_UPDATE constant varchar2(30) := 'UDO_LINKEDDOCS_UPDATE';
   LINKEDDOC_FUNC_DELETE constant varchar2(30) := 'UDO_LINKEDDOCS_DELETE';
+  LINKEDDOC_FUNC_DLOAD  constant varchar2(30) := 'UDO_LINKEDDOCS_DOWNLOAD';
   LINKEDDOC_TABLENAME   constant varchar2(30) := 'UDO_LINKEDDOCS';
   LINKEDDOC_UNITCODE    constant varchar2(30) := 'UdoLinkedFiles';
-  NOPRIV_INS_MSG        constant varchar2(200) := 'У вас нет прав на присоединение файлов к записи в этом каталоге. Обратитесь к администратору.';
-  NOPRIV_UPD_MSG        constant varchar2(200) := 'У вас нет прав на изменение присоединенных файлов в этом каталоге. Обратитесь к администратору.';
-  NOPRIV_DEL_MSG        constant varchar2(200) := 'У вас нет прав на удаление присоединенных файлов в этом каталоге. Обратитесь к администратору.';
+  NOPRIV_INS_MSG        constant varchar2(200) := 'в том числе на присоединение файлов к этой записи раздела.';
+  NOPRIV_UPD_MSG        constant varchar2(200) := 'в том числе на изменение присоединенных к этой записи раздела файлов.';
+  NOPRIV_DEL_MSG        constant varchar2(200) := 'в том числе на удаление присоединенных к этой записи раздела файлов.';
   EXMSG_ADD_NOTALLOW    constant varchar2(200) := 'Добавление присоединенных файлов к записи раздела «%S» невозможно.';
   EXMSG_ADD_BLOCKED     constant varchar2(200) := 'Добавление присоединенных файлов к записи раздела «%S» заблокировано администратором.';
   EXMSG_EMPTY_FILE      constant varchar2(200) := 'Добавление пустого файла недопустимо.';
@@ -362,6 +363,16 @@ create or replace package body UDO_PKG_LINKEDDOCS is
                         where S.IDENT = NIDENT);
     L_FILE LC_FILES%rowtype;
   begin
+    /* фиксация начала выполнения действия */
+    PKG_ENV.PROLOGUE(NCOMPANY,
+                     null,
+                     null,
+                     null,
+                     null,
+                     LINKEDDOC_UNITCODE,
+                     LINKEDDOC_FUNC_DLOAD,
+                     LINKEDDOC_TABLENAME,
+                     NDOCUMENT);
     open LC_FILES;
     loop
       fetch LC_FILES
@@ -372,6 +383,16 @@ create or replace package body UDO_PKG_LINKEDDOCS is
       end if;
     end loop;
     close LC_FILES;
+    /* фиксация окончания выполнения действия */
+    PKG_ENV.EPILOGUE(NCOMPANY,
+                     null,
+                     null,
+                     null,
+                     null,
+                     LINKEDDOC_UNITCODE,
+                     LINKEDDOC_FUNC_DLOAD,
+                     LINKEDDOC_TABLENAME,
+                     NDOCUMENT);
   end;
 
   procedure CLEAR_EXPIRED(NCOMPANY in number) is

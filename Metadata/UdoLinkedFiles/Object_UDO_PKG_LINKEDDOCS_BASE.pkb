@@ -60,19 +60,7 @@ create or replace package body UDO_PKG_LINKEDDOCS_BASE is
     REC      out UDO_LINKEDDOCS%rowtype
   ) is
     cursor LC_REC is
-      select RN,
-             COMPANY,
-             INT_NAME,
-             UNITCODE,
-             DOCUMENT,
-             REAL_NAME,
-             UPLOAD_TIME,
-             SAVE_TILL,
-             FILESTORE,
-             FILESIZE,
-             authid,
-             NOTE,
-             FILE_DELETED
+      select *
         from UDO_LINKEDDOCS
        where RN = NRN
          and COMPANY = NCOMPANY;
