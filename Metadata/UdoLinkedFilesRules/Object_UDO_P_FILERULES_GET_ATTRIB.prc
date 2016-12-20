@@ -12,7 +12,8 @@ create or replace procedure UDO_P_FILERULES_GET_ATTRIB
                and RS.RN = U.RN) as SUNITNAME
       from UDO_FILERULES T,
            UNITLIST      U
-     where T.UNITCODE = U.UNITCODE
+     where T.RN = NRN
+       and T.UNITCODE = U.UNITCODE
        and exists (select null
               from V_USERPRIV UP
              where UP.COMPANY = T.COMPANY
