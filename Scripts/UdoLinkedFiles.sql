@@ -1596,11 +1596,13 @@ create or replace package body UDO_PKG_LINKEDDOCS is
   /* определяем каталога записи в разделе */
   procedure GET_DOC_CATALOG_N_JPERS
   (
-    NCOMPANY  in number,
-    NDOCUMENT in number,
-    SUNITCODE in varchar2,
-    NCRN      out number,
-    NJUR_PERS out number
+    NCOMPANY       in number,
+    NDOCUMENT      in number,
+    SUNITCODE      in varchar2,
+    NCRN           out number,
+    NJUR_PERS      out number,
+    NSHARE_COMPANY out number,
+    SMASTERCODE    out varchar2
   ) is
     cursor LC_UNITPARAMS is
       select R.RN,
@@ -1608,7 +1610,9 @@ create or replace package body UDO_PKG_LINKEDDOCS is
              R.CTLGFIELD,
              R.JPERSFIELD,
              U.SIGN_HIER,
-             U.SIGN_JURPERS
+             U.SIGN_JURPERS,
+             U.SIGN_SHARE,
+             nvl(U.MASTERCODE,U.UNITCODE) MASTERCODE
         from UDO_FILERULES R,
              UNITLIST      U
        where R.COMPANY = NCOMPANY
@@ -1622,29 +1626,33 @@ create or replace package body UDO_PKG_LINKEDDOCS is
     fetch LC_UNITPARAMS
       into L_UNITPARAMS;
     close LC_UNITPARAMS;
-
+  
     if L_UNITPARAMS.RN is null or L_UNITPARAMS.TABLENAME is null then
       return;
     end if;
-
+  
     if L_UNITPARAMS.SIGN_HIER = 1 and L_UNITPARAMS.CTLGFIELD is not null then
-
-      L_SQL := 'select ' || L_UNITPARAMS.CTLGFIELD || ' from ' || L_UNITPARAMS.TABLENAME ||
-               ' where RN = :1';
+    
+      L_SQL := 'select ' || L_UNITPARAMS.CTLGFIELD || ' from ' || L_UNITPARAMS.TABLENAME || ' where RN = :1';
       execute immediate L_SQL
         into NCRN
         using NDOCUMENT;
     end if;
-
+  
+    if L_UNITPARAMS.SIGN_SHARE = 1 then
+      NSHARE_COMPANY := NCOMPANY;
+    else
+      NSHARE_COMPANY := null;
+    end if;
+  
     if L_UNITPARAMS.SIGN_JURPERS = 1 and L_UNITPARAMS.JPERSFIELD is not null then
-
-      L_SQL := 'select ' || L_UNITPARAMS.JPERSFIELD || ' from ' || L_UNITPARAMS.TABLENAME ||
-               ' where RN = :1';
+    
+      L_SQL := 'select ' || L_UNITPARAMS.JPERSFIELD || ' from ' || L_UNITPARAMS.TABLENAME || ' where RN = :1';
       execute immediate L_SQL
         into NJUR_PERS
         using NDOCUMENT;
     end if;
-
+    SMASTERCODE := L_UNITPARAMS.MASTERCODE;
   end;
 
   procedure CHECK_PRIVILEGE
@@ -1660,17 +1668,18 @@ create or replace package body UDO_PKG_LINKEDDOCS is
         from UNITFUNC T
        where T.UNITCODE = SUNITCODE
          and T.STANDARD = NFUNC;
-    L_FUNC    UNITFUNC.CODE%type;
-    L_CRN     ACATALOG.RN%type;
-    L_JURPERS JURPERSONS.RN%type;
-
+    L_FUNC          UNITFUNC.CODE%type;
+    L_CRN           ACATALOG.RN%type;
+    L_JURPERS       JURPERSONS.RN%type;
+    L_SHARE_COMPANY COMPANIES.RN%type;
+    L_MASTERCODE    UNITLIST.UNITCODE%type;
   begin
     open LC_FUNCCODE;
     fetch LC_FUNCCODE
       into L_FUNC;
     close LC_FUNCCODE;
-    GET_DOC_CATALOG_N_JPERS(NCOMPANY, NDOCUMENT, SUNITCODE, L_CRN, L_JURPERS);
-    PKG_ENV.ACCESS(NCOMPANY  => NCOMPANY,
+    GET_DOC_CATALOG_N_JPERS(NCOMPANY, NDOCUMENT, SUNITCODE, L_CRN, L_JURPERS, L_SHARE_COMPANY, L_MASTERCODE);
+    PKG_ENV.ACCESS(NCOMPANY  => L_SHARE_COMPANY,
                    NVERSION  => null,
                    NCATALOG  => L_CRN,
                    NJUR_PERS => L_JURPERS,
@@ -1703,20 +1712,22 @@ create or replace package body UDO_PKG_LINKEDDOCS is
                                               '       U.NAME         as SUSERFULLNAME,' || CHR(10) ||
                                               '       T.NOTE         as SNOTE,' || CHR(10) ||
                                               '       T.FILE_DELETED as NFILE_DELETED' || CHR(10) ||
-                                              '  from UDO_LINKEDDOCS T,' || CHR(10) ||
-                                              '       USERLIST       U' || CHR(10) ||
-                                              ' where T.AUTHID = U.AUTHID' || CHR(10) ||
-                                              '   and T.DOCUMENT = :FUNC_STANDART_INSERT' ||
-                                              CHR(10) || '   and T.UNITCODE = :2';
+                                              '  from UDO_LINKEDDOCS T,' || CHR(10) || '       USERLIST       U' ||
+                                              CHR(10) || ' where T.AUTHID = U.AUTHID' || CHR(10) ||
+                                              '   and T.DOCUMENT = :1' || CHR(10) ||
+                                              '   and T.UNITCODE = :2';
     C_SQL_CTLG_PRIV  constant PKG_STD.TSQL := CHR(10) ||
                                               '   and exists(select * from V_USERPRIV UP where UP.CATALOG  = :3)';
     C_SQL_JPERS_PRIV constant PKG_STD.TSQL := CHR(10) ||
                                               '   and exists( select * from V_USERPRIV UP where UP.JUR_PERS = :4 and UP.UNITCODE=:5)';
-    L_CRN     ACATALOG.RN%type;
-    L_JURPERS JURPERSONS.RN%type;
-    L_RES_ROW CUR_LINKEDDOCS%rowtype;
+    L_CRN           ACATALOG.RN%type;
+    L_JURPERS       JURPERSONS.RN%type;
+    L_RES_ROW       CUR_LINKEDDOCS%rowtype;
+    L_SHARE_COMPANY COMPANIES.RN%type;
+    L_MASTERCODE    UNITLIST.UNITCODE%type;
   begin
-    GET_DOC_CATALOG_N_JPERS(NCOMPANY, NDOCUMENT, SUNITCODE, L_CRN, L_JURPERS);
+    GET_DOC_CATALOG_N_JPERS(NCOMPANY, NDOCUMENT, SUNITCODE, L_CRN, L_JURPERS, L_SHARE_COMPANY, L_MASTERCODE);
+    
     if L_CRN is null and L_JURPERS is null then
       open L_RES_CUR for C_SQL
         using NDOCUMENT, SUNITCODE;
@@ -1725,10 +1736,14 @@ create or replace package body UDO_PKG_LINKEDDOCS is
         using NDOCUMENT, SUNITCODE, L_CRN;
     elsif L_CRN is null and L_JURPERS is not null then
       open L_RES_CUR for C_SQL || C_SQL_JPERS_PRIV
-        using NDOCUMENT, SUNITCODE, L_JURPERS, SUNITCODE;
+        using NDOCUMENT, SUNITCODE, L_JURPERS, L_MASTERCODE;
     else
-      open L_RES_CUR for C_SQL || C_SQL_CTLG_PRIV || C_SQL_JPERS_PRIV
-        using NDOCUMENT, SUNITCODE, L_CRN, L_JURPERS, SUNITCODE;
+/*      P_EXCEPTION(0,C_SQL || C_SQL_CTLG_PRIV || C_SQL_JPERS_PRIV || CR ||
+      'NDOCUMENT=%S'||CR||'SUNITCODET=%S'||CR||'L_CRNT=%S'||CR||'L_JURPERST=%S'||CR||'SUNITCODE=%S',
+      NDOCUMENT, SUNITCODE, L_CRN, L_JURPERS, SUNITCODE
+      );
+*/      open L_RES_CUR for C_SQL || C_SQL_CTLG_PRIV || C_SQL_JPERS_PRIV
+        using NDOCUMENT, SUNITCODE, L_CRN, L_JURPERS, L_MASTERCODE;
     end if;
     loop
       fetch L_RES_CUR
@@ -1736,7 +1751,7 @@ create or replace package body UDO_PKG_LINKEDDOCS is
       exit when L_RES_CUR%notfound;
       pipe row(L_RES_ROW);
     end loop;
-
+  
     close L_RES_CUR;
   end V;
 
@@ -1763,7 +1778,7 @@ create or replace package body UDO_PKG_LINKEDDOCS is
          and T.UNITCODE(+) = UL.UNITCODE
          and UL.UNITCODE = SUNITCODE;
     L_RULE LC_RULE%rowtype;
-
+  
     cursor LC_FILESCNT is
       select count(*)
         from UDO_LINKEDDOCS T
@@ -1809,24 +1824,17 @@ create or replace package body UDO_PKG_LINKEDDOCS is
     /* Проверяем права на добавление записи в разделе */
     CHECK_PRIVILEGE(NCOMPANY, NDOCUMENT, SUNITCODE, FUNC_STANDART_INSERT, NOPRIV_INS_MSG);
     /* фиксация начала выполнения действия */
-    PKG_ENV.PROLOGUE(NCOMPANY,
-                     null,
-                     null,
-                     null,
-                     null,
-                     LINKEDDOC_UNITCODE,
-                     LINKEDDOC_FUNC_INSERT,
-                     LINKEDDOC_TABLENAME);
+    PKG_ENV.PROLOGUE(NCOMPANY, null, null, null, null, LINKEDDOC_UNITCODE, LINKEDDOC_FUNC_INSERT, LINKEDDOC_TABLENAME);
     UDO_PKG_LINKEDDOCS_BASE.DOC_INSERT(NCOMPANY   => NCOMPANY,
-                                        SUNITCODE  => SUNITCODE,
-                                        NDOCUMENT  => NDOCUMENT,
-                                        SREAL_NAME => SREAL_NAME,
-                                        SNOTE      => SNOTE,
-                                        NFILESIZE  => L_FILESIZE,
-                                        NFILESTORE => L_RULE.FILESTORE,
-                                        NLIFETIME  => L_RULE.LIFETIME,
-                                        BFILEDATA  => BFILEDATA,
-                                        NRN        => NRN);
+                                       SUNITCODE  => SUNITCODE,
+                                       NDOCUMENT  => NDOCUMENT,
+                                       SREAL_NAME => SREAL_NAME,
+                                       SNOTE      => SNOTE,
+                                       NFILESIZE  => L_FILESIZE,
+                                       NFILESTORE => L_RULE.FILESTORE,
+                                       NLIFETIME  => L_RULE.LIFETIME,
+                                       BFILEDATA  => BFILEDATA,
+                                       NRN        => NRN);
     /* фиксация окончания выполнения действия */
     PKG_ENV.EPILOGUE(NCOMPANY,
                      null,
@@ -1849,10 +1857,10 @@ create or replace package body UDO_PKG_LINKEDDOCS is
   begin
     /* Считывание записи */
     UDO_PKG_LINKEDDOCS_BASE.DOC_EXISTS(NRN => NRN, NCOMPANY => NCOMPANY, REC => L_REC);
-
+  
     /* Проверяем права на добавление записи в разделе */
     CHECK_PRIVILEGE(NCOMPANY, L_REC.DOCUMENT, L_REC.UNITCODE, FUNC_STANDART_UPDATE, NOPRIV_UPD_MSG);
-
+  
     /* фиксация начала выполнения действия */
     PKG_ENV.PROLOGUE(NCOMPANY,
                      null,
@@ -1863,14 +1871,14 @@ create or replace package body UDO_PKG_LINKEDDOCS is
                      LINKEDDOC_FUNC_UPDATE,
                      LINKEDDOC_TABLENAME,
                      NRN);
-
+  
     /* Базовое исправление */
     UDO_PKG_LINKEDDOCS_BASE.DOC_UPDATE(NRN           => NRN,
-                                        NCOMPANY      => NCOMPANY,
-                                        SREAL_NAME    => L_REC.REAL_NAME,
-                                        SNOTE         => SNOTE,
-                                        NFILE_DELETED => L_REC.FILE_DELETED);
-
+                                       NCOMPANY      => NCOMPANY,
+                                       SREAL_NAME    => L_REC.REAL_NAME,
+                                       SNOTE         => SNOTE,
+                                       NFILE_DELETED => L_REC.FILE_DELETED);
+  
     /* фиксация окончания выполнения действия */
     PKG_ENV.EPILOGUE(NCOMPANY,
                      null,
@@ -1892,10 +1900,10 @@ create or replace package body UDO_PKG_LINKEDDOCS is
   begin
     /* Считывание записи */
     UDO_PKG_LINKEDDOCS_BASE.DOC_EXISTS(NRN => NRN, NCOMPANY => NCOMPANY, REC => L_REC);
-
+  
     /* Проверяем права на добавление записи в разделе */
     CHECK_PRIVILEGE(NCOMPANY, L_REC.DOCUMENT, L_REC.UNITCODE, FUNC_STANDART_DELETE, NOPRIV_DEL_MSG);
-
+  
     /* фиксация начала выполнения действия */
     PKG_ENV.PROLOGUE(NCOMPANY,
                      null,
@@ -1906,10 +1914,10 @@ create or replace package body UDO_PKG_LINKEDDOCS is
                      LINKEDDOC_FUNC_DELETE,
                      LINKEDDOC_TABLENAME,
                      NRN);
-
+  
     /* Базовое удаление */
     UDO_PKG_LINKEDDOCS_BASE.DOC_DELETE(NRN => NRN, NCOMPANY => NCOMPANY, ONLY_IN_STORE => false);
-
+  
     /* фиксация окончания выполнения действия */
     PKG_ENV.EPILOGUE(NCOMPANY,
                      null,
@@ -1934,9 +1942,7 @@ create or replace package body UDO_PKG_LINKEDDOCS is
       select T.NRN,
              T.NFILE_DELETED
         from table(V(NCOMPANY, NDOCUMENT, SUNITCODE)) T
-       where T.NRN in (select S.DOCUMENT
-                         from SELECTLIST S
-                        where S.IDENT = NIDENT);
+       where T.NRN in (select S.DOCUMENT from SELECTLIST S where S.IDENT = NIDENT);
     L_FILE LC_FILES%rowtype;
   begin
     /* фиксация начала выполнения действия */
@@ -1976,7 +1982,7 @@ create or replace package body UDO_PKG_LINKEDDOCS is
       select RN
         from UDO_LINKEDDOCS T
        where T.FILE_DELETED = 0
-                   and T.SAVE_TILL < sysdate
+         and T.SAVE_TILL < sysdate
          and T.COMPANY = NCOMPANY;
     L_NRN PKG_STD.TREF;
   begin
