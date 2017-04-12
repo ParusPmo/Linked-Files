@@ -13,9 +13,6 @@
         <Column Field="NMAXFILESIZE" Caption="Максимальна розмір приєднаного файлу (Кбайт) (0 - не обмежений)" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
         <Column Field="NLIFETIME" Caption="Термін зберігання файлу (міс) (0 - не обмежений)" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
         <Column Field="NBLOCKED" Caption="Заблокувати додавання" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
-        <Column Field="STABLENAME" Caption="Ім&apos;я таблиці розділу" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
-        <Column Field="SCTLGFIELD" Caption="Поле дерева каталогів" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
-        <Column Field="SJPERSFIELD" Caption="Поле юридичної особи" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
       </Columns>
       <Actions>
         <Standard/>

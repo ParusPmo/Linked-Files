@@ -22,15 +22,6 @@ LIFETIME          number( 4 ) default 0 not null
 /* Заблокировать добавление */
 BLOCKED           number( 1 ) default 0 not null
                   constraint UDO_C_FILERULES_BLOCKED_VAL check( BLOCKED IN (0,1) ),
-/* Имя таблицы раздела */
-TABLENAME         varchar2( 30 ) not null
-                  constraint UDO_C_FILERULES_TABLENAME_NB check( RTRIM(TABLENAME) IS NOT NULL ),
-/* Поле дерева каталогов */
-CTLGFIELD         varchar2( 30 )
-                  constraint UDO_C_FILERULES_CTLGFIELD_NB check( RTRIM(CTLGFIELD) IS NOT NULL or CTLGFIELD IS NULL ),
-/* Поле юридического лица */
-JPERSFIELD        varchar2( 30 )
-                  constraint UDO_C_FILERULES_JPERSFIELD_NB check( RTRIM(JPERSFIELD) IS NOT NULL ),
 /* Действие системы */
 UNITFUNC          number( 17 ) not null,
 /* ключи */

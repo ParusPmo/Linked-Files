@@ -1,10 +1,9 @@
-/* Триггер до удаления */
 create or replace trigger UDO_T_LINKEDDOCS_BDELETE
   before delete on UDO_LINKEDDOCS for each row
 begin
   /* регистрация события */
   if ( PKG_IUD.PROLOGUE('UDO_LINKEDDOCS', 'D') ) then
-    PKG_IUD.REG('RN', :old.RN);
+    PKG_IUD.REG_RN('RN', :old.RN);
     PKG_IUD.REG('COMPANY', :old.COMPANY);
     PKG_IUD.REG('INT_NAME', :old.INT_NAME);
     PKG_IUD.REG(1, 'UNITCODE', :old.UNITCODE);
@@ -20,5 +19,5 @@ begin
     PKG_IUD.EPILOGUE;
   end if;
 end;
+
 /
-show errors trigger UDO_T_LINKEDDOCS_BDELETE;

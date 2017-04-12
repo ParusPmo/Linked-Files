@@ -6,9 +6,6 @@ create or replace procedure UDO_P_FILERULES_BASE_INSERT
   NMAXFILES    in number,   -- Максимальное кол-во присоединенных к записи файлов (0 - неограничено)
   NMAXFILESIZE in number,   -- Максимальное размер присоединенного файла (Кбайт) (0 - неограничено)
   NLIFETIME    in number,   -- Срок хранения файла (мес) (0 - неограничено)
-  STABLENAME   in varchar2, -- Имя таблицы раздела
-  SCTLGFIELD   in varchar2, -- Поле дерева каталогов
-  SJPERSFIELD  in varchar2, -- Поле юридического лица
   NRN          out number   -- Регистрационный  номер
 ) as
   ACTION_NAME_UK              constant varchar2(15) := 'Приєднані файли';
@@ -90,10 +87,8 @@ begin
 
   /* добавление записи в таблицу */
   insert into UDO_FILERULES
-    (RN, COMPANY, UNITCODE, FILESTORE, MAXFILES, MAXFILESIZE, LIFETIME, BLOCKED, TABLENAME, CTLGFIELD, JPERSFIELD,
-     UNITFUNC)
+    (RN, COMPANY, UNITCODE, FILESTORE, MAXFILES, MAXFILESIZE, LIFETIME, BLOCKED, UNITFUNC)
   values
-    (NRN, NCOMPANY, SUNITCODE, NFILESTORE, NMAXFILES, NMAXFILESIZE, NLIFETIME, 0, STABLENAME, SCTLGFIELD, SJPERSFIELD,
-     L_UNITFUNC);
+    (NRN, NCOMPANY, SUNITCODE, NFILESTORE, NMAXFILES, NMAXFILESIZE, NLIFETIME, 0, L_UNITFUNC);
 end;
 /
