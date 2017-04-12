@@ -10,7 +10,7 @@
     <I>572</I>
   </Width>
   <Height>
-    <I>369</I>
+    <I>294</I>
   </Height>
   <DesignSize>
     <List>
@@ -18,7 +18,7 @@
         <I>556</I>
       </Item>
       <Item Index="1">
-        <I>330</I>
+        <I>255</I>
       </Item>
     </List>
   </DesignSize>
@@ -39,7 +39,7 @@
       <I>556</I>
     </Width>
     <Height>
-      <I>288</I>
+      <I>213</I>
     </Height>
     <Anchors>
       <Set>
@@ -59,7 +59,7 @@
           <I>556</I>
         </Item>
         <Item Index="1">
-          <I>288</I>
+          <I>213</I>
         </Item>
       </List>
     </DesignSize>
@@ -75,7 +75,7 @@
         <I>552</I>
       </Width>
       <Height>
-        <I>282</I>
+        <I>207</I>
       </Height>
       <ActivePage>TPContentTabSheet1</ActivePage>
       <Anchors>
@@ -100,7 +100,7 @@
               <I>544</I>
             </Item>
             <Item Index="1">
-              <I>254</I>
+              <I>179</I>
             </Item>
           </List>
         </DesignSize>
@@ -115,7 +115,7 @@
             <I>532</I>
           </Width>
           <Height>
-            <I>121</I>
+            <I>49</I>
           </Height>
           <Anchors>
             <Set>
@@ -137,7 +137,7 @@
                 <I>532</I>
               </Item>
               <Item Index="1">
-                <I>121</I>
+                <I>49</I>
               </Item>
             </List>
           </DesignSize>
@@ -208,226 +208,13 @@
             <DictLink.ParentLink>True</DictLink.ParentLink>
             <ControlId><![CDATA[{31A9E301-B353-41D3-9B23-9AAFD4E36EE8}]]></ControlId>
           </Object>
-          <Object Class="TPContentEdit" Name="STABLENAME">
-            <Left>
-              <I>264</I>
-            </Left>
-            <Top>
-              <I>41</I>
-            </Top>
-            <Width>
-              <I>258</I>
-            </Width>
-            <WebColumnSpan>
-              <I>0</I>
-            </WebColumnSpan>
-            <Anchors>
-              <Set>
-                <Item>akTop</Item>
-                <Item>akRight</Item>
-              </Set>
-            </Anchors>
-            <ContentDictInterface.Params>
-              <Collection>
-                <Item Index="0">
-                  <Name><![CDATA[pos_tablename]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptIn</Item>
-                    </Set>
-                  </ParamTypes>
-                  <Control>STABLENAME</Control>
-                  <SourceKind>skControl</SourceKind>
-                </Item>
-                <Item Index="1">
-                  <Name><![CDATA[tablename]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptOut</Item>
-                    </Set>
-                  </ParamTypes>
-                  <Control>STABLENAME</Control>
-                  <SourceKind>skControl</SourceKind>
-                </Item>
-                <Item Index="2">
-                  <Name><![CDATA[sel_rcount]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptIn</Item>
-                    </Set>
-                  </ParamTypes>
-                  <SourceKind>skValue</SourceKind>
-                  <Value><![CDATA[1]]></Value>
-                </Item>
-              </Collection>
-            </ContentDictInterface.Params>
-            <ContentDictInterface.DocCode><![CDATA[Tables]]></ContentDictInterface.DocCode>
-            <ContentDictInterface.ShowMethod><![CDATA[normal]]></ContentDictInterface.ShowMethod>
-            <ControlLabel.Text><![CDATA[Ім'я таблиці розділу]]></ControlLabel.Text>
-            <MaxLength>
-              <I>30</I>
-            </MaxLength>
-            <Required>True</Required>
-            <TabOrder>
-              <I>1</I>
-            </TabOrder>
-            <ControlId><![CDATA[{E18569AB-FF84-4DDE-91D8-B887101F00B3}]]></ControlId>
-          </Object>
-          <Object Class="TPContentEdit" Name="SCTLGFIELD">
-            <Left>
-              <I>264</I>
-            </Left>
-            <Top>
-              <I>66</I>
-            </Top>
-            <Width>
-              <I>258</I>
-            </Width>
-            <WebColumnSpan>
-              <I>0</I>
-            </WebColumnSpan>
-            <Anchors>
-              <Set>
-                <Item>akTop</Item>
-                <Item>akRight</Item>
-              </Set>
-            </Anchors>
-            <ContentDictInterface.Params>
-              <Collection>
-                <Item Index="0">
-                  <Name><![CDATA[object_name]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptIn</Item>
-                    </Set>
-                  </ParamTypes>
-                  <Control>STABLENAME</Control>
-                  <SourceKind>skControl</SourceKind>
-                </Item>
-                <Item Index="1">
-                  <Name><![CDATA[pos_name]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptIn</Item>
-                    </Set>
-                  </ParamTypes>
-                  <Control>SCTLGFIELD</Control>
-                  <SourceKind>skControl</SourceKind>
-                </Item>
-                <Item Index="2">
-                  <Name><![CDATA[name]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptOut</Item>
-                    </Set>
-                  </ParamTypes>
-                  <Control>SCTLGFIELD</Control>
-                  <SourceKind>skControl</SourceKind>
-                </Item>
-                <Item Index="3">
-                  <Name><![CDATA[kind]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptIn</Item>
-                    </Set>
-                  </ParamTypes>
-                  <SourceKind>skValue</SourceKind>
-                  <Value><![CDATA[0]]></Value>
-                </Item>
-              </Collection>
-            </ContentDictInterface.Params>
-            <ContentDictInterface.DocCode><![CDATA[SystemDictionaries]]></ContentDictInterface.DocCode>
-            <ContentDictInterface.ShowMethod><![CDATA[columns]]></ContentDictInterface.ShowMethod>
-            <ControlLabel.Text><![CDATA[Поле дерева каталогів]]></ControlLabel.Text>
-            <MaxLength>
-              <I>30</I>
-            </MaxLength>
-            <TabOrder>
-              <I>2</I>
-            </TabOrder>
-            <ControlId><![CDATA[{155C7D7B-58B1-41D2-BEC4-B948FC876189}]]></ControlId>
-          </Object>
-          <Object Class="TPContentEdit" Name="SJPERSFIELD">
-            <Left>
-              <I>264</I>
-            </Left>
-            <Top>
-              <I>91</I>
-            </Top>
-            <Width>
-              <I>258</I>
-            </Width>
-            <WebColumnSpan>
-              <I>0</I>
-            </WebColumnSpan>
-            <Anchors>
-              <Set>
-                <Item>akTop</Item>
-                <Item>akRight</Item>
-              </Set>
-            </Anchors>
-            <ContentDictInterface.Params>
-              <Collection>
-                <Item Index="0">
-                  <Name><![CDATA[object_name]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptIn</Item>
-                    </Set>
-                  </ParamTypes>
-                  <Control>STABLENAME</Control>
-                  <SourceKind>skControl</SourceKind>
-                </Item>
-                <Item Index="1">
-                  <Name><![CDATA[pos_name]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptIn</Item>
-                    </Set>
-                  </ParamTypes>
-                  <Control>SJPERSFIELD</Control>
-                  <SourceKind>skControl</SourceKind>
-                </Item>
-                <Item Index="2">
-                  <Name><![CDATA[name]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptOut</Item>
-                    </Set>
-                  </ParamTypes>
-                  <Control>SJPERSFIELD</Control>
-                  <SourceKind>skControl</SourceKind>
-                </Item>
-                <Item Index="3">
-                  <Name><![CDATA[kind]]></Name>
-                  <ParamTypes>
-                    <Set>
-                      <Item>ptIn</Item>
-                    </Set>
-                  </ParamTypes>
-                  <SourceKind>skValue</SourceKind>
-                  <Value><![CDATA[0]]></Value>
-                </Item>
-              </Collection>
-            </ContentDictInterface.Params>
-            <ContentDictInterface.DocCode><![CDATA[SystemDictionaries]]></ContentDictInterface.DocCode>
-            <ContentDictInterface.ShowMethod><![CDATA[columns]]></ContentDictInterface.ShowMethod>
-            <ControlLabel.Text><![CDATA[Поле юридичної особи]]></ControlLabel.Text>
-            <MaxLength>
-              <I>30</I>
-            </MaxLength>
-            <TabOrder>
-              <I>3</I>
-            </TabOrder>
-            <ControlId><![CDATA[{F5EF91E2-1249-4B55-B560-C30474150F10}]]></ControlId>
-          </Object>
         </Object>
         <Object Class="TPContainerGroupBox" Name="TPContainerGroupBox2">
           <Left>
             <I>5</I>
           </Left>
           <Top>
-            <I>124</I>
+            <I>51</I>
           </Top>
           <Width>
             <I>534</I>
@@ -630,7 +417,7 @@
       <I>458</I>
     </Left>
     <Top>
-      <I>297</I>
+      <I>222</I>
     </Top>
     <Width>
       <I>90</I>
@@ -653,7 +440,7 @@
       <I>363</I>
     </Left>
     <Top>
-      <I>297</I>
+      <I>222</I>
     </Top>
     <Width>
       <I>90</I>

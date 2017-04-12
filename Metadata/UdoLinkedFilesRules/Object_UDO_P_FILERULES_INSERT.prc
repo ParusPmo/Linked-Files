@@ -1,11 +1,7 @@
-/* Добавление/размножение записи */
 create or replace procedure UDO_P_FILERULES_INSERT
 (
   NCOMPANY     in number,   -- Организация  (ссылка на COMPANIES(RN))
   SUNITNAME    in varchar2, -- Наименование раздела
-  STABLENAME   in varchar2, -- Имя таблицы раздела
-  SCTLGFIELD   in varchar2, -- Поле дерева каталогов
-  SJPERSFIELD  in varchar2, -- Поле юридического лица
   SFILESTORE   in varchar2, -- Место хранения
   NMAXFILES    in number,   -- Максимальное кол-во присоединенных к записи файлов (0 - неограничено)
   NMAXFILESIZE in number,   -- Максимальное размер присоединенного файла (Кбайт) (0 - неограничено)
@@ -35,9 +31,6 @@ begin
                               NMAXFILES,
                               NMAXFILESIZE,
                               NLIFETIME,
-                              STABLENAME,
-                              SCTLGFIELD,
-                              SJPERSFIELD,
                               NRN);
 
   /* фиксация окончания выполнения действия */
@@ -51,5 +44,5 @@ begin
                    'UDO_FILERULES',
                    NRN);
 end;
+
 /
-show errors procedure UDO_P_FILERULES_INSERT;

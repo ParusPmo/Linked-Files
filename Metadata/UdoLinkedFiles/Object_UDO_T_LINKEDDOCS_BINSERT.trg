@@ -1,10 +1,9 @@
-/* Триггер до добавления */
 create or replace trigger UDO_T_LINKEDDOCS_BINSERT
   before insert on UDO_LINKEDDOCS for each row
 begin
   /* регистрация события */
   if ( PKG_IUD.PROLOGUE('UDO_LINKEDDOCS', 'I') ) then
-    PKG_IUD.REG('RN', :new.RN);
+    PKG_IUD.REG_RN('RN', :new.RN);
     PKG_IUD.REG('COMPANY', :new.COMPANY);
     PKG_IUD.REG('INT_NAME', :new.INT_NAME);
     PKG_IUD.REG(1, 'UNITCODE', :new.UNITCODE);
@@ -20,5 +19,5 @@ begin
     PKG_IUD.EPILOGUE;
   end if;
 end;
+
 /
-show errors trigger UDO_T_LINKEDDOCS_BINSERT;

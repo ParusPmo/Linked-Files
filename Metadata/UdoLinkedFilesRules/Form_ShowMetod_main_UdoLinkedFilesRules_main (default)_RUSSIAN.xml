@@ -13,9 +13,6 @@
         <Column Field="NMAXFILESIZE" Caption="Максимальное размер присоединенного файла (Кбайт) (0 - неограничено)" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
         <Column Field="NLIFETIME" Caption="Срок хранения файла (мес) (0 - неограничено)" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
         <Column Field="NBLOCKED" Caption="Заблокировать добавление" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
-        <Column Field="STABLENAME" Caption="Имя таблицы раздела" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
-        <Column Field="SCTLGFIELD" Caption="Поле дерева каталогов" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
-        <Column Field="SJPERSFIELD" Caption="Поле юридического лица" Visible="1" Editable="0" Orderable="1" Filterable="1"/>
       </Columns>
       <Actions>
         <Standard/>

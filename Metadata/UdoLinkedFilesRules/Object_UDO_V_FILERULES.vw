@@ -10,10 +10,7 @@ create or replace force view UDO_V_FILERULES
   NLIFETIME,                            -- Срок хранения файла (мес) (0 - неограничено)
   SFILESTORE,                           -- Сервер хранения
   SUNITNAME,                            -- Раздел (наименование)
-  NBLOCKED,                             -- Заблокировать добавление
-  STABLENAME,                           -- Имя таблицы раздела
-  SCTLGFIELD,                           -- Поле дерева каталогов
-  SJPERSFIELD                           -- Поле юридического лица
+  NBLOCKED                              -- Заблокировать добавление
 )
 as
 select
@@ -24,16 +21,13 @@ select
   T.MAXFILES,                           -- NMAXFILES
   T.MAXFILESIZE,                        -- NMAXFILESIZE
   T.LIFETIME,                           -- NLIFETIME
-  S.CODE,                               -- SFILESTORE
+  U.CODE,                               -- SFILESTORE
   (select RS.TEXT from V_RESOURCES_LOCAL RS where RS.TABLE_NAME = 'UNITLIST' and RS.COLUMN_NAME = 'UNITNAME' and RS.RN = U.RN), -- SUNITNAME
-  T.BLOCKED,                            -- NBLOCKED
-  T.TABLENAME,                          -- STABLENAME
-  T.CTLGFIELD,                          -- SCTLGFIELD
-  T.JPERSFIELD                          -- SJPERSFIELD
+  T.BLOCKED                             -- NBLOCKED
 from
   UDO_FILERULES T,
-  UDO_FILESTORES S,
-  UNITLIST U
-where T.FILESTORE = S.RN
-  and T.UNITCODE = U.UNITCODE
+  UDO_FILESTORES U,
+  UNITLIST U2
+where T.FILESTORE = U.RN
+  and T.UNITCODE = U2.UNITCODE
   and exists (select null from V_USERPRIV UP where UP.COMPANY = T.COMPANY and UP.UNITCODE = 'UdoLinkedFilesRules');

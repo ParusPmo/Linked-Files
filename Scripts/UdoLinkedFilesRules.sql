@@ -22,15 +22,6 @@ LIFETIME          number( 4 ) default 0 not null
 /* Заблокировать добавление */
 BLOCKED           number( 1 ) default 0 not null
                   constraint UDO_C_FILERULES_BLOCKED_VAL check( BLOCKED IN (0,1) ),
-/* Имя таблицы раздела */
-TABLENAME         varchar2( 30 ) not null
-                  constraint UDO_C_FILERULES_TABLENAME_NB check( RTRIM(TABLENAME) IS NOT NULL ),
-/* Поле дерева каталогов */
-CTLGFIELD         varchar2( 30 )
-                  constraint UDO_C_FILERULES_CTLGFIELD_NB check( RTRIM(CTLGFIELD) IS NOT NULL or CTLGFIELD IS NULL ),
-/* Поле юридического лица */
-JPERSFIELD        varchar2( 30 )
-                  constraint UDO_C_FILERULES_JPERSFIELD_NB check( RTRIM(JPERSFIELD) IS NOT NULL ),
 /* Действие системы */
 UNITFUNC          number( 17 ) not null,
 /* ключи */
@@ -110,9 +101,6 @@ create or replace procedure UDO_P_FILERULES_BASE_INSERT
   NMAXFILES    in number,   -- Максимальное кол-во присоединенных к записи файлов (0 - неограничено)
   NMAXFILESIZE in number,   -- Максимальное размер присоединенного файла (Кбайт) (0 - неограничено)
   NLIFETIME    in number,   -- Срок хранения файла (мес) (0 - неограничено)
-  STABLENAME   in varchar2, -- Имя таблицы раздела
-  SCTLGFIELD   in varchar2, -- Поле дерева каталогов
-  SJPERSFIELD  in varchar2, -- Поле юридического лица
   NRN          out number   -- Регистрационный  номер
 ) as
   ACTION_NAME_UK              constant varchar2(15) := 'Приєднані файли';
@@ -194,11 +182,9 @@ begin
 
   /* добавление записи в таблицу */
   insert into UDO_FILERULES
-    (RN, COMPANY, UNITCODE, FILESTORE, MAXFILES, MAXFILESIZE, LIFETIME, BLOCKED, TABLENAME, CTLGFIELD, JPERSFIELD,
-     UNITFUNC)
+    (RN, COMPANY, UNITCODE, FILESTORE, MAXFILES, MAXFILESIZE, LIFETIME, BLOCKED, UNITFUNC)
   values
-    (NRN, NCOMPANY, SUNITCODE, NFILESTORE, NMAXFILES, NMAXFILESIZE, NLIFETIME, 0, STABLENAME, SCTLGFIELD, SJPERSFIELD,
-     L_UNITFUNC);
+    (NRN, NCOMPANY, SUNITCODE, NFILESTORE, NMAXFILES, NMAXFILESIZE, NLIFETIME, 0, L_UNITFUNC);
 end;
 /
 
@@ -215,10 +201,7 @@ create or replace force view UDO_V_FILERULES
   NLIFETIME,                            -- Срок хранения файла (мес) (0 - неограничено)
   SFILESTORE,                           -- Сервер хранения
   SUNITNAME,                            -- Раздел (наименование)
-  NBLOCKED,                             -- Заблокировать добавление
-  STABLENAME,                           -- Имя таблицы раздела
-  SCTLGFIELD,                           -- Поле дерева каталогов
-  SJPERSFIELD                           -- Поле юридического лица
+  NBLOCKED                              -- Заблокировать добавление
 )
 as
 select
@@ -229,18 +212,15 @@ select
   T.MAXFILES,                           -- NMAXFILES
   T.MAXFILESIZE,                        -- NMAXFILESIZE
   T.LIFETIME,                           -- NLIFETIME
-  S.CODE,                               -- SFILESTORE
+  U.CODE,                               -- SFILESTORE
   (select RS.TEXT from V_RESOURCES_LOCAL RS where RS.TABLE_NAME = 'UNITLIST' and RS.COLUMN_NAME = 'UNITNAME' and RS.RN = U.RN), -- SUNITNAME
-  T.BLOCKED,                            -- NBLOCKED
-  T.TABLENAME,                          -- STABLENAME
-  T.CTLGFIELD,                          -- SCTLGFIELD
-  T.JPERSFIELD                          -- SJPERSFIELD
+  T.BLOCKED                             -- NBLOCKED
 from
   UDO_FILERULES T,
-  UDO_FILESTORES S,
-  UNITLIST U
-where T.FILESTORE = S.RN
-  and T.UNITCODE = U.UNITCODE
+  UDO_FILESTORES U,
+  UNITLIST U2
+where T.FILESTORE = U.RN
+  and T.UNITCODE = U2.UNITCODE
   and exists (select null from V_USERPRIV UP where UP.COMPANY = T.COMPANY and UP.UNITCODE = 'UdoLinkedFilesRules');
 
 
@@ -260,9 +240,6 @@ begin
     PKG_IUD.REG('MAXFILESIZE', :old.MAXFILESIZE);
     PKG_IUD.REG('LIFETIME', :old.LIFETIME);
     PKG_IUD.REG('BLOCKED', :old.BLOCKED);
-    PKG_IUD.REG('TABLENAME', :old.TABLENAME);
-    PKG_IUD.REG('CTLGFIELD', :old.CTLGFIELD);
-    PKG_IUD.REG('JPERSFIELD', :old.JPERSFIELD);
     PKG_IUD.REG('UNITFUNC', :old.UNITFUNC);
     PKG_IUD.EPILOGUE;
   end if;
@@ -271,14 +248,10 @@ end;
 show errors trigger UDO_T_FILERULES_BDELETE;
 
 
-/* Базовое исправление */
 create or replace procedure UDO_P_FILERULES_BASE_UPDATE
 (
   NRN                       in number,       -- Регистрационный  номер
   NCOMPANY                  in number,       -- Организация  (ссылка на COMPANIES(RN))
-  STABLENAME                in varchar2,     -- Имя таблицы раздела
-  SCTLGFIELD                in varchar2,     -- Поле дерева каталогов
-  SJPERSFIELD               in varchar2,     -- Поле юридического лица
   NFILESTORE                in number,       -- Место хранения
   NMAXFILES                 in number,       -- Максимальное кол-во присоединенных к записи файлов (0 - неограничено)
   NMAXFILESIZE              in number,       -- Максимальное размер присоединенного файла (Кбайт) (0 - неограничено)
@@ -291,10 +264,7 @@ begin
      set FILESTORE = NFILESTORE,
          MAXFILES = NMAXFILES,
          MAXFILESIZE = NMAXFILESIZE,
-         LIFETIME = NLIFETIME,
-         TABLENAME = STABLENAME,
-         CTLGFIELD = SCTLGFIELD,
-         JPERSFIELD = SJPERSFIELD
+         LIFETIME = NLIFETIME
    where RN = NRN
      and COMPANY = NCOMPANY;
 
@@ -302,8 +272,8 @@ begin
     PKG_MSG.RECORD_NOT_FOUND( NRN,'UdoLinkedFilesRules' );
   end if;
 end;
+
 /
-show errors procedure UDO_P_FILERULES_BASE_UPDATE;
 
 
 /* Базовое удаление */
@@ -368,9 +338,6 @@ begin
     PKG_IUD.REG('MAXFILESIZE', :new.MAXFILESIZE);
     PKG_IUD.REG('LIFETIME', :new.LIFETIME);
     PKG_IUD.REG('BLOCKED', :new.BLOCKED);
-    PKG_IUD.REG('TABLENAME', :new.TABLENAME);
-    PKG_IUD.REG('CTLGFIELD', :new.CTLGFIELD);
-    PKG_IUD.REG('JPERSFIELD', :new.JPERSFIELD);
     PKG_IUD.REG('UNITFUNC', :new.UNITFUNC);
     PKG_IUD.EPILOGUE;
   end if;
@@ -472,9 +439,6 @@ begin
     PKG_IUD.REG('MAXFILESIZE', :new.MAXFILESIZE, :old.MAXFILESIZE);
     PKG_IUD.REG('LIFETIME', :new.LIFETIME, :old.LIFETIME);
     PKG_IUD.REG('BLOCKED', :new.BLOCKED, :old.BLOCKED);
-    PKG_IUD.REG('TABLENAME', :new.TABLENAME, :old.TABLENAME);
-    PKG_IUD.REG('CTLGFIELD', :new.CTLGFIELD, :old.CTLGFIELD);
-    PKG_IUD.REG('JPERSFIELD', :new.JPERSFIELD, :old.JPERSFIELD);
     PKG_IUD.REG('UNITFUNC', :new.UNITFUNC, :old.UNITFUNC);
     PKG_IUD.EPILOGUE;
   end if;
@@ -576,14 +540,10 @@ end;
 
 grant execute on UDO_P_FILERULES_BLOCK to public;
 
-/* Добавление/размножение записи */
 create or replace procedure UDO_P_FILERULES_INSERT
 (
   NCOMPANY     in number,   -- Организация  (ссылка на COMPANIES(RN))
   SUNITNAME    in varchar2, -- Наименование раздела
-  STABLENAME   in varchar2, -- Имя таблицы раздела
-  SCTLGFIELD   in varchar2, -- Поле дерева каталогов
-  SJPERSFIELD  in varchar2, -- Поле юридического лица
   SFILESTORE   in varchar2, -- Место хранения
   NMAXFILES    in number,   -- Максимальное кол-во присоединенных к записи файлов (0 - неограничено)
   NMAXFILESIZE in number,   -- Максимальное размер присоединенного файла (Кбайт) (0 - неограничено)
@@ -613,9 +573,6 @@ begin
                               NMAXFILES,
                               NMAXFILESIZE,
                               NLIFETIME,
-                              STABLENAME,
-                              SCTLGFIELD,
-                              SJPERSFIELD,
                               NRN);
 
   /* фиксация окончания выполнения действия */
@@ -629,20 +586,16 @@ begin
                    'UDO_FILERULES',
                    NRN);
 end;
+
 /
-show errors procedure UDO_P_FILERULES_INSERT;
 
 
 grant execute on UDO_P_FILERULES_INSERT to public;
 
-/* Исправление записи */
 create or replace procedure UDO_P_FILERULES_UPDATE
 (
   NRN          in number,   -- Регистрационный  номер
   NCOMPANY     in number,   -- Организация  (ссылка на COMPANIES(RN))
-  STABLENAME   in varchar2, -- Имя таблицы раздела
-  SCTLGFIELD   in varchar2, -- Поле дерева каталогов
-  SJPERSFIELD  in varchar2, -- Поле юридического лица
   SFILESTORE   in varchar2, -- Место хранения
   NMAXFILES    in number,   -- Максимальное кол-во присоединенных к записи файлов (0 - неограничено)
   NMAXFILESIZE in number,   -- Максимальное размер присоединенного файла (Кбайт) (0 - неограничено)
@@ -671,9 +624,6 @@ begin
   /* Базовое исправление */
   UDO_P_FILERULES_BASE_UPDATE(NRN,
                               NCOMPANY,
-                              STABLENAME,
-                              SCTLGFIELD,
-                              SJPERSFIELD,
                               NFILESTORE,
                               NMAXFILES,
                               NMAXFILESIZE,
@@ -690,8 +640,8 @@ begin
                    'UDO_FILERULES',
                    NRN);
 end;
+
 /
-show errors procedure UDO_P_FILERULES_UPDATE;
 
 
 grant execute on UDO_P_FILERULES_UPDATE to public;
