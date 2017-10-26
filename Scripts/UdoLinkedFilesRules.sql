@@ -213,7 +213,7 @@ select
   T.MAXFILESIZE,                        -- NMAXFILESIZE
   T.LIFETIME,                           -- NLIFETIME
   U.CODE,                               -- SFILESTORE
-  (select RS.TEXT from V_RESOURCES_LOCAL RS where RS.TABLE_NAME = 'UNITLIST' and RS.COLUMN_NAME = 'UNITNAME' and RS.RN = U.RN), -- SUNITNAME
+  (select RS.TEXT from V_RESOURCES_LOCAL RS where RS.TABLE_NAME = 'UNITLIST' and RS.COLUMN_NAME = 'UNITNAME' and RS.RN = U2.RN), -- SUNITNAME
   T.BLOCKED                             -- NBLOCKED
 from
   UDO_FILERULES T,
